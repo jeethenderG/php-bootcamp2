@@ -10,6 +10,7 @@ By Deafult port :8000 and IP: 127.0.0.1
 Routes:
 
 POST : path : 127.0.0.1:8000/api/users/create
+
        request ("json")
                : {"name":"xxxx","email":"xxxx@gmail.com","phone":a ten digit integer}
        reponse (json) 
@@ -21,6 +22,7 @@ POST : path : 127.0.0.1:8000/api/users/create
                   }
  
 GET : path : 127.0.0.1:8000/api/users/
+
        request body : empty (not required)
        response : Fetches all the users.
        
@@ -55,18 +57,21 @@ DELETE : path : 127.0.0.1:8000/api/users/delete
                   }
                   
 PATCH : path : 127.0.0.1:8000/api/users/update/{id}
-        request ("json")
+
+       request ("json")
                : not required
        reponse (json) (on success)
                :  fetches User By Id.
                
-To run using local system uding local databse make sure you have php, laravel, and mysql change the database connection details in .env file. Then run the following in your terminal:
-
+To run using local system uding local databse make sure you have php, laravel, and mysql change the database connection details in .env file. 
 In .env file :
+
       Make necessary changes of database like : Username,password.
 
- 1.php artisan migrate (to migrate all the required tables, this is one time)
- 1.1 If you want to refresh tables Use : php artisan migrate:refresh
- 2.php artisan serve (laravel server will start and you can start using the aplication)
+Then run the following in your terminal:
+
+  -> php artisan migrate (to migrate all the required tables, this is one time)
+  -> If you want to refresh tables Use : php artisan migrate:refresh
+  -> php artisan serve (laravel server will start and you can start using the aplication)
              
        
