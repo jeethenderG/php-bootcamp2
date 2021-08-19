@@ -300,5 +300,4 @@ class UsersController extends Controller
             "message" => "user with $id updated",
         ]);
     }
-
 }

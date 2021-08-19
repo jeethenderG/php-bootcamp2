@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/users/create', [UsersController::class, 'CreateUser']);//....... add user
 
 Route::get('/users/search', [UsersController::class, 'SearchUser']); //.......search user
-//Route::get('/users/{email}', [UsersController::class, 'getuserbyemail']); //.......
+//Route::get('/users/{email}', [UsersController::class, 'getuserbyemail']); //...
 //Route::get('/users/{phone}', [UsersController::class, 'getuserbyphone']); //.......get user by phone
 
 Route::get('/users', [UsersController::class, 'GetAllUsers']); //.......get all the users

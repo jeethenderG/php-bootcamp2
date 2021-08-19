@@ -23,7 +23,6 @@ class Services{
         $count = DB::table('customers')->where('phone',$phone)->count();
 
         return $count;
-
     }
 
     public function ValidateUserByName(Request $request){
