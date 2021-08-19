@@ -70,8 +70,10 @@ In .env file :
 
 Then run the following in your terminal:
 
-  -> php artisan migrate (to migrate all the required tables, this is one time)
-  -> If you want to refresh tables Use : php artisan migrate:refresh
-  -> php artisan serve (laravel server will start and you can start using the aplication)
-             
+Run :
+   ```
+   1. **php artisan migrate** (to migrate all the required tables, this is one time)
+      If you want to refresh tables Use : **php artisan migrate:refresh**
+   2. **php artisan serve** (laravel server will start and you can start using the aplication)
+   ```         
        
