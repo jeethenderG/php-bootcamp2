@@ -26,6 +26,7 @@ class UsersController extends Controller
             ],400);
         }
 
+        /*
         $valid_name = $user_service->ValidateUserByName($request);
         if ($valid_name != 0) {
             Log::error('user name already exist');
@@ -41,7 +42,7 @@ class UsersController extends Controller
                 'message' => 'this user with email  already exist'
             ],400);
         }
-
+        */
 
         $data = $user_service->CreateUser($request);
         Log::info("User as been created with given data");
@@ -72,10 +73,11 @@ class UsersController extends Controller
             }
             Log::info("User has been succesfully fetched ");
             return response()->json([
-                'id' => $users[0]->id,
-                'name' => $users[0]->name,
-                'email' => $users[0]->email,
-                'phone' => $users[0]->phone,
+                $users,
+//                'id' => $users[0]->id,
+//                'name' => $users[0]->name,
+//                'email' => $users[0]->email,
+//                'phone' => $users[0]->phone,
 
             ],200);
         }

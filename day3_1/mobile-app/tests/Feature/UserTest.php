@@ -52,7 +52,7 @@ class UserTest extends TestCase
     }
     */
 
-
+    /*
     public function test_deleteuser_fail()
     {
         $data = [
@@ -66,7 +66,7 @@ class UserTest extends TestCase
             ->assertJson(['message' => "User with name-jeethendernaik does not exists"]);
 
     }
-
+    */
     /*
     public function test_deleteuser_success()
     {
@@ -81,7 +81,7 @@ class UserTest extends TestCase
             ->assertJson(['message' => "user with name-deleted deleted"]);
 
     }
-
+    */
     public function test_searchUser_byName()
     {
         $data = [
@@ -90,9 +90,17 @@ class UserTest extends TestCase
             'phone'=> 0,
         ];
 
+        $res=[
+            'id'=>3,
+            'name' => 'jeethender',
+            'email'=>'h@gmail.com',
+            'phone'=>1234567892
+        ];
+
+
        $response = $this->json('GET', 'api/users/search',$data);
        $response->assertStatus(200)
-                ->assertJson(['id'=>1,'name' => 'jeethender','email'=>'hg@gmail.com','phone'=>9928882231,]);
+                ->assertJson([[$res]]);
 
     }
 
@@ -100,27 +108,41 @@ class UserTest extends TestCase
     {
         $data = [
             'name'=> '',
-            'email'=> 'hg@gmail.com',
+            'email'=> 'h@gmail.com',
             'phone'=> 0,
         ];
 
+       $res=[
+            'id'=>1,
+            'name' => 'ugender',
+            'email'=>'h@gmail.com',
+            'phone'=>1234567891
+        ];
         $response = $this->json('GET', 'api/users/search',$data);
         $response->assertStatus(200)
-            ->assertJson(['id'=>1,'name' => 'jeethender','email'=>'hg@gmail.com','phone'=>9928882231,]);
+            ->assertJson($res);
 
     }
-    */
+
+
     public function test_searchUser_byPhone()
     {
         $data = [
             'name'=> '',
             'email'=> '',
-            'phone'=> 9928882231,
+            'phone'=> 1234567891,
+        ];
+
+        $res=[
+            'id'=>1,
+            'name' => 'ugender',
+            'email'=>'h@gmail.com',
+            'phone'=>1234567891
         ];
 
         $response = $this->json('GET', 'api/users/search',$data);
         $response->assertStatus(200)
-            ->assertJson(['id'=>1,'name' => 'jeethender','email'=>'hg@gmail.com','phone'=>9928882231,]);
+            ->assertJson($res);
 
     }
 
