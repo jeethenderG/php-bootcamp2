@@ -18,6 +18,7 @@ class Services{
     }
 
     public function ValidateUserByPhone(Request $request){
+
         $phone = $request->input('phone');
         $count = DB::table('customers')->where('phone',$phone)->count();
 

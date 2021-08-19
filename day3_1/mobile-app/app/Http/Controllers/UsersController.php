@@ -20,7 +20,7 @@ class UsersController extends Controller
 
         $valid_phone = $user_service->ValidateUserByPhone($request);
         if ($valid_phone != 0) {
-            Log::error('phone number already exist');
+            Log::error('phone number already exist ');
             return response()->json([
                 'message' => 'this user with phone number  already exist'
             ],400);
