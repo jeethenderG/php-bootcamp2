@@ -26,36 +26,56 @@ GET : path : 127.0.0.1:8000/api/users/
        request body : empty (not required)
        response : Fetches all the users.
        
-GET : path : 127.0.0.1:8000/api/users/search
+GET : path : 127.0.0.1:8000/api/users/search/name/{name}
 
-       Note : if name is not empty it GetsUserByName 
-              if name is empty and email is not empty it GetsUserByEmail
-              if name,email is empty it GetUsersByPhone
-              if all fields are empty returns error.
-              Any one feild either name,email,phone should be non empty.
-       request ("json")
-               : {"name":"xxxx","email":"xxxx@gmail.com","phone":a ten digit integer}
        reponse (json) 
                :  {
                      "id": X,
                      "name": "xxxx",
-                     "email": "xxxx@gmail.com",
+                     "email": "xxxx@domain.com",
                      "phone": a ten digit number
                   }
-DELETE : path : 127.0.0.1:8000/api/users/delete
+                  
+       
+GET : path : 127.0.0.1:8000/api/users/search/email/{email}
 
-       Note : if name is not empty it DeleteUserByName 
-              if name is empty and email is not empty it DeleteUserByEmail
-              if name,email is empty it DeleteUsersByPhone
-              if all fields are empty returns error.
-              Any one feild either name,email,phone should be non empty.
-       request ("json")
-               : {"name":"xxxx","email":"xxxx@gmail.com","phone":a ten digit integer}
+       reponse (json) 
+               :  {
+                     "id": X,
+                     "name": "xxxx",
+                     "email": "xxxx@domain.com",
+                     "phone": a ten digit number
+                  }
+       
+GET : path : 127.0.0.1:8000/api/users/search/phone/{phone}
+
+       Note : Phone number must be 10digit
+       reponse (json) 
+               :  {
+                     "id": X,
+                     "name": "xxxx",
+                     "email": "xxxx@domain.com",
+                     "phone": a ten digit number
+                  }
+DELETE : path : 127.0.0.1:8000/api/users/delete/name/{name}
+
        reponse (json) (on success)
                :  {
                      User is deleted
                   }
-                  
+DELETE : path : 127.0.0.1:8000/api/users/delete/email/{email}
+
+       reponse (json) (on success)
+               :  {
+                     User is deleted
+                  }
+DELETE : path : 127.0.0.1:8000/api/users/delete/phone/{phone}
+       
+       Note : Phone number must be 10digit
+       reponse (json) (on success)
+               :  {
+                     User is deleted
+                  }
 PATCH : path : 127.0.0.1:8000/api/users/update/{id}
 
        request ("json")
