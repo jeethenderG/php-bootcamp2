@@ -26,7 +26,7 @@ GET : path : 127.0.0.1:8000/api/users/
        request body : empty (not required)
        response : Fetches all the users.
        
-GET : path : 127.0.0.1:8000/api/users/search/name/{name}
+GET : path : 127.0.0.1:8000/api/search/name/{name}
 
        reponse (json) 
                :  {
@@ -37,7 +37,7 @@ GET : path : 127.0.0.1:8000/api/users/search/name/{name}
                   }
                   
        
-GET : path : 127.0.0.1:8000/api/users/search/email/{email}
+GET : path : 127.0.0.1:8000/api/search/email/{email}
 
        reponse (json) 
                :  {
@@ -47,7 +47,7 @@ GET : path : 127.0.0.1:8000/api/users/search/email/{email}
                      "phone": a ten digit number
                   }
        
-GET : path : 127.0.0.1:8000/api/users/search/phone/{phone}
+GET : path : 127.0.0.1:8000/api/search/phone/{phone}
 
        Note : Phone number must be 10digit
        reponse (json) 
@@ -57,26 +57,26 @@ GET : path : 127.0.0.1:8000/api/users/search/phone/{phone}
                      "email": "xxxx@domain.com",
                      "phone": a ten digit number
                   }
-DELETE : path : 127.0.0.1:8000/api/users/delete/name/{name}
+DELETE : path : 127.0.0.1:8000/api/delete/name/{name}
 
        reponse (json) (on success)
                :  {
                      User is deleted
                   }
-DELETE : path : 127.0.0.1:8000/api/users/delete/email/{email}
+DELETE : path : 127.0.0.1:8000/api/delete/email/{email}
 
        reponse (json) (on success)
                :  {
                      User is deleted
                   }
-DELETE : path : 127.0.0.1:8000/api/users/delete/phone/{phone}
+DELETE : path : 127.0.0.1:8000/api/delete/phone/{phone}
        
        Note : Phone number must be 10digit
        reponse (json) (on success)
                :  {
                      User is deleted
                   }
-PATCH : path : 127.0.0.1:8000/api/users/update/{id}
+PATCH : path : 127.0.0.1:8000/api/update/{id}
 
        request ("json")
                : not required
