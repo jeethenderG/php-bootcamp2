@@ -20,16 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/users/create', [UsersController::class, 'CreateUser']);//....... add user
+Route::post('/users/create', [UsersController::class, 'createUser']);//....... add user
 
-Route::get('/users/search', [UsersController::class, 'SearchUser']); //.......search user
-//Route::get('/users/{email}', [UsersController::class, 'getuserbyemail']); //.......
-//Route::get('/users/{phone}', [UsersController::class, 'getuserbyphone']); //.......get user by phone
+Route::get('/search/name/{name}', [UsersController::class, 'getUserByName']); //...Get User By Mail
+Route::get('/search/email/{email}', [UsersController::class, 'getUserByEmail']); //...Get User By Mail
+Route::get('/search/phone/{phone}', [UsersController::class, 'getUserByPhone']); //.......get user by phone
 
-Route::get('/users', [UsersController::class, 'GetAllUsers']); //.......get all the users
+Route::get('/users', [UsersController::class, 'getAllUsers']); //.......get all the users
 
-Route::delete('/users/delete' , [UsersController::class, 'DeleteUser']) ; // ....del user
-Route::patch('/users/update/{id}' , [UsersController::class, 'Update']) ; // ....del user
-//Route::delete('/users/{name}', [UsersController::class, 'deleteuserbyname']); //.......del user by name
-//Route::delete('/users/{email}', [UsersController::class, 'deleteuserbyemail']); //.......del user by email
+Route::patch('/update/{id}', [UsersController::class, 'update']); // ....del user
+Route::delete('/delete/name/{name}', [UsersController::class, 'deleteUserByName']); //.......del user by name
+Route::delete('/delete/email/{email}', [UsersController::class, 'deleteUserByEmail']); //.......del user by name
+Route::delete('/delete/phone/{phone}', [UsersController::class, 'deleteUserByPhone']); //.......del user by email
 
