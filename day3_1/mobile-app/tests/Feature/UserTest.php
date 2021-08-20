@@ -22,6 +22,48 @@ class UserTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_Validation_phone_fail(){
+
+        $data = [
+            'name'=> 'jeethendernaik',
+            'email'=> 'hello@gmail.com',
+            'phone'=> 999998888,
+        ];
+
+
+        $response = $this->json('POST', 'api/users/create',$data);
+        $response->assertStatus(400)
+            ->assertJson(['Validation Error']);
+
+    }
+    public function test_Validation_email_fail(){
+
+        $data = [
+            'name'=> 'jeethendernaik',
+            'email'=> 'hi',
+            'phone'=> 9999988888,
+        ];
+
+
+        $response = $this->json('POST', 'api/users/create',$data);
+        $response->assertStatus(400)
+            ->assertJson(['Validation Error']);
+
+    }
+    public function test_Validation_name_fail(){
+
+        $data = [
+            'name'=> '1455s',
+            'email'=> 'hello@gmail.com',
+            'phone'=> 9999988888,
+        ];
+
+
+        $response = $this->json('POST', 'api/users/create',$data);
+        $response->assertStatus(400)
+            ->assertJson(['Validation Error']);
+
+    }
     /*
     public function test_createuser_success()
     {
@@ -36,89 +78,84 @@ class UserTest extends TestCase
             ->assertJson(['id'=>5,'name' => 'jeethendernaik','email'=>'hello@gmail.com','phone'=>9999988888,]);
 
     }
-
+    /*
     public function test_createuser_fail()
     {
         $data = [
             'name'=> 'jeethender',
-            'email'=> 'hello@gmail.com',
-            'phone'=> 9999988888,
+            'email'=> 'hee@gmail.com',
+            'phone'=> 1234567890,
         ];
 
         $response = $this->json('POST', 'api/users/create',$data);
-        $response->assertStatus(200)
+        $response->assertStatus(400)
             ->assertJson(['message'=>'this user with phone number  already exist']);
 
     }
-    */
+   */
 
-    /*
     public function test_deleteuser_fail()
     {
-        $data = [
-            'name'=> 'jeethendernaik',
-            'email'=> 'hello@gmail.com',
-            'phone'=> 9999988888,
-        ];
 
-        $response = $this->json('DELETE', 'api/users/delete',$data);
+        $response = $this->json('DELETE', 'api/users/delete/name/jeethendernaik');
         $response->assertStatus(400)
             ->assertJson(['message' => "User with name-jeethendernaik does not exists"]);
 
     }
-    */
-    /*
-    public function test_deleteuser_success()
-    {
-        $data = [
-            'name'=> 'deleted',
-            'email'=> 'hello@gmail.com',
-            'phone'=> 9999988888,
-        ];
 
-        $response = $this->json('DELETE', 'api/users/delete',$data);
+    /*
+    public function test_delete_user_by_name_success()
+    {
+
+        $response = $this->json('DELETE', 'api/users/delete/name/dele');
         $response->assertStatus(200)
-            ->assertJson(['message' => "user with name-deleted deleted"]);
+            ->assertJson(['message' => "user with name-dele deleted"]);
 
     }
-    */
+
+    public function test_delete_user_by_phone_success()
+    {
+
+        $response = $this->json('DELETE', 'api/users/delete/phone/1234567899');
+        $response->assertStatus(200)
+            ->assertJson(['message' => "user with phone-1234567899 deleted"]);
+
+    }
+    public function test_delete_user_by_email_success()
+    {
+
+        $response = $this->json('DELETE', 'api/users/delete/email/dele@gmail.com');
+        $response->assertStatus(200)
+            ->assertJson(['message' => "user with email-dele@gmail.com deleted"]);
+
+    }
+   */
     public function test_searchUser_byName()
     {
-        $data = [
-            'name'=> 'jeethender',
-            'email'=> '',
-            'phone'=> 0,
-        ];
-
         $res=[
             'id'=>3,
             'name' => 'jeethender',
-            'email'=>'h@gmail.com',
-            'phone'=>1234567892
+            'email'=>'hg@gmail.com',
+            'phone'=>1234567893
         ];
 
 
-       $response = $this->json('GET', 'api/users/search',$data);
-       $response->assertStatus(200)
-                ->assertJson([[$res]]);
+        $response = $this->json('GET', 'api/users/search/name/jeethender');
+        $response->assertStatus(200)
+            ->assertJson([[$res]]);
 
     }
 
     public function test_searchUser_byEmail()
     {
-        $data = [
-            'name'=> '',
-            'email'=> 'h@gmail.com',
-            'phone'=> 0,
-        ];
 
-       $res=[
+        $res=[
             'id'=>1,
             'name' => 'ugender',
             'email'=>'h@gmail.com',
             'phone'=>1234567891
         ];
-        $response = $this->json('GET', 'api/users/search',$data);
+        $response = $this->json('GET', 'api/users/search/email/h@gmail.com');
         $response->assertStatus(200)
             ->assertJson($res);
 
@@ -127,11 +164,6 @@ class UserTest extends TestCase
 
     public function test_searchUser_byPhone()
     {
-        $data = [
-            'name'=> '',
-            'email'=> '',
-            'phone'=> 1234567891,
-        ];
 
         $res=[
             'id'=>1,
@@ -140,22 +172,17 @@ class UserTest extends TestCase
             'phone'=>1234567891
         ];
 
-        $response = $this->json('GET', 'api/users/search',$data);
+        $response = $this->json('GET', 'api/users/search/phone/1234567891');
         $response->assertStatus(200)
             ->assertJson($res);
 
     }
 
-   /*
+
     public function test_SearchUser_not_exists_byPhone()
     {
-        $data = [
-            'name'=> '',
-            'email'=> '',
-            'phone'=> 99288822319,
-        ];
 
-        $response = $this->json('GET', 'api/users/search',$data);
+        $response = $this->json('GET', 'api/users/search/phone/9928882239');
         $response->assertStatus(400)
             ->assertJson(['message' => "No user found with this phone-9928882239"]);
 
@@ -163,13 +190,8 @@ class UserTest extends TestCase
 
     public function test_SearchUser_not_exists_byEmail()
     {
-        $data = [
-            'name'=> '',
-            'email'=> 'hhh@gmail.com',
-            'phone'=> 9928882239,
-        ];
 
-        $response = $this->json('GET', 'api/users/search',$data);
+        $response = $this->json('GET', 'api/users/search/email/hhh@gmail.com');
         $response->assertStatus(400)
             ->assertJson(['message' => "No user found with this email-hhh@gmail.com"]);
 
@@ -177,16 +199,11 @@ class UserTest extends TestCase
 
     public function test_SearchUser_not_exists_byName()
     {
-        $data = [
-            'name'=> 'jeethenderr',
-            'email'=> '',
-            'phone'=> 0,
-        ];
 
-        $response = $this->json('GET', 'api/users/search',$data);
+        $response = $this->json('GET', 'api/users/search/name/jeethenderr');
         $response->assertStatus(400)
             ->assertJson(['message' => "No user found with this name-jeethenderr"]);
 
     }
-    */
+
 }

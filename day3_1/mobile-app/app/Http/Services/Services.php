@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Services;
-
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class Services{
@@ -11,8 +10,27 @@ class Services{
         $data_validate = $request->all();
         $validator = Validator::make($data_validate, [
             'name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:10',
+            'email' => 'required|email|regex:/^.+@.+$/|unique:users',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|size:10',
+        ]);
+        return $validator;
+    }
+
+    public function ValidatePhone($phone){
+        $validator = Validator::make(['data' => $phone], [
+            'data' => 'size:10'
+        ]);
+        return $validator;
+    }
+    public function ValidateName($name){
+        $validator = Validator::make(['data' => $name], [
+            'data' => 'required|string'
+        ]);
+        return $validator;
+    }
+    public function ValidateEmail($email){
+        $validator = Validator::make(['data' => $email], [
+            'data' => 'regex:/^.+@.+$/i'
         ]);
         return $validator;
     }
